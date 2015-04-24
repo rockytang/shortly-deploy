@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      // write code here
     },
 
     jshint: {
@@ -38,6 +39,7 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      // write code here
     },
 
     watch: {
