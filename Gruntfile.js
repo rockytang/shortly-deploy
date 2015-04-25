@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
@@ -91,8 +92,9 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-      }
-    },
+        command: 'git push azure master'
+        }
+      },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -131,12 +133,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('upload', function(n) {
+    // console.log('what is our option',grunt.option());
     if(grunt.option('prod')) {
-      shell:{
-        command: function(){
-          return 'git push azure master';
-        }
-      }
+      grunt.task.run([ 'shell:prodServer' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -144,7 +143,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
-    'build', 'nodemon', 'upload'
+    'build', 'upload'
   ]);
 
 
