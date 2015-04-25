@@ -66,7 +66,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'public',
           src: ['*.css', '!*.min.css'],
-          dest: 'public/dist',
+          dest: 'public',
           ext: '.min.css'
         }]
       }
@@ -117,6 +117,7 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
+
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
@@ -126,12 +127,16 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'jshint', 'concat', 'uglify'
+    'cssmin','jshint', 'concat', 'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
+      shell:{
+        command: function(){
+          return 'git push azure master';
+        }
+      }
     } else {
       grunt.task.run([ 'server-dev' ]);
     }

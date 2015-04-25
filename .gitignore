@@ -11,6 +11,10 @@ node_modules
 built.js
 built.min.js
 db/shortly.sqlite
+public/dist/style.min.css
+public/style.min.css
+
+
 
 # Floobits
 .floo
