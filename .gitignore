@@ -8,7 +8,9 @@ iisnode.yml
 Icon
 
 node_modules
-
+built.js
+built.min.js
+db/shortly.sqlite
 
 # Floobits
 .floo

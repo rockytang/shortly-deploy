@@ -10,8 +10,8 @@ module.exports = function(grunt) {
         src: [
           'app/**/*.js',
           'lib/**/*.js',
-          'public/**/*.js',
-          'views/**/*.ejs'
+          'public/**/*.js'
+          // 'views/**/*.ejs'
           ],
         dest: 'built.js',
       },
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
         src: [
           'app/**/*.js',
           'lib/**/*.js',
-          'public/**/*.js',
-          'views/**/*.ejs'
+          'public/**/*.js'
+          // 'views/**/*.ejs'
         ]
       },
       options: {
