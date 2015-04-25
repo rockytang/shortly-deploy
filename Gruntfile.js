@@ -3,6 +3,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: [
+          'app/**/*.js',
+          'lib/**/*.js',
+          'public/**/*.js',
+          'views/**/*.ejs'
+          ],
+        dest: 'built.js',
+      },
     },
 
     mochaTest: {
@@ -21,13 +33,23 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      // write code here
+      // consider mangle except jQuery, Backbone, and express
+      my_target: {
+        files: {
+          'built.min.js' : ['built.js']
+        }
+      }
     },
 
     jshint: {
-      files: [
-        // Add filespec list here
-      ],
+      files: {
+        src: [
+          'app/**/*.js',
+          'lib/**/*.js',
+          'public/**/*.js',
+          'views/**/*.ejs'
+        ]
+      },
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
@@ -39,7 +61,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-      // write code here
+      target:{
+        files:[{
+          expand: true,
+          cwd: 'public',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/dist',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -96,6 +126,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'jshint', 'concat', 'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -108,6 +139,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build', 'nodemon', 'upload'
   ]);
 
 
